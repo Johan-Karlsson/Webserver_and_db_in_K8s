@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-app  # Sets Deployment name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-app
+  template:
+    metadata:
+      labels:
+        app: postgres-app
+    spec:
+      containers:
+        - name: postgres-app
+          image: postgres-test # Sets Image
+          imagePullPolicy: "Never"
+          ports:
+            - containerPort: 8080  # Exposes container port
+          envFrom:
+            - configMapRef:
+                name: postgres-config

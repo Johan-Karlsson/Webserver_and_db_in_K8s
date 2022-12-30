@@ -1,0 +1,7 @@
+#!/bin/bash
+
+minikube image build -t postgres-test:latest .
+
+kubectl delete deployment postgres-app
+
+kubectl apply -f app_deployment.yaml
